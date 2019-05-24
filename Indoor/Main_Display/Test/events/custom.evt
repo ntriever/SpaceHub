@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<eventdefinitions>
+  <event name="gre.animate.complete.cell_press" type="0x8">
+    <label>cell_press animation complete</label>
+    <description>The animation named cell_press has completed</description>
+  </event>
+  <event name="gre.animate.stop.cell_press" type="0x8">
+    <label>cell_press animation stopped</label>
+    <description>The animation named cell_press has been stopped</description>
+  </event>
+  <event name="timer.bottombar" type="0x8">
+    <label>timer.bottombar timer fired</label>
+    <description>The timer named timer.bottombar has fired</description>
+  </event>
+  <event name="timer.main" type="0x8">
+    <description>The timer named timer.main has fired</description>
+  </event>
+  <event name="timer.updateinfo" type="0x8">
+    <description>The timer named timer.updateinfo has fired</description>
+  </event>
+</eventdefinitions>

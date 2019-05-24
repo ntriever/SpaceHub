@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="root">
+	<item value="60" key="pref.default_fps"/>
+	<item value="1.0" key="pref.editor_zoom"/>
+	<item value="Table" key="pref.default_table_name"/>
+	<item value="" key="anim-cell_press"/>
+	<item value="rectifier1" key="pref.default_control_name"/>
+	<item value="setup_setting_screen" key="pref.default_screen_name"/>
+	<item value="setup_body" key="pref.default_layer_name"/>
+	<item value="234:131:77:" key="pref.default_fill_color"/>
+	<list key="pref.screen_list_order">
+		<item value="main_screen"/>
+		<item value="rectifier_screen"/>
+		<item value="aircon_screen"/>
+		<item value="hyphen_screen"/>
+		<item value="emeter_screen"/>
+		<item value="entrance_screen"/>
+		<item value="etc_screen"/>
+		<item value="setup_screen"/>
+		<item value="temperature_screen"/>
+	</list>
+</section>
