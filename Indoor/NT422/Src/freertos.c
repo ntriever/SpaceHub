@@ -90,7 +90,7 @@ enum {
 /* USER CODE BEGIN Variables */
 unsigned short xmitTime[3] = { 0, };
 unsigned short recvTime[3] = { 0, }, mainRecvTime = 0;
-char setupPortDevice = 0;
+char setupPortDevice = 0, commError[3];
 
 extern BoardInfo myInfo;
 extern Queue receiveQueue[3], mainReceiveQueue;
@@ -288,9 +288,9 @@ void StartCom1Task(void const * argument)
 {
 	/* USER CODE BEGIN StartCom1Task */
 	char rcvData[100], xmitData[15] = { 0, }, ret;
-	unsigned char xmitNob, stx, etx, xmitType = 0;
+	unsigned char xmitNob, stx, etx;
 	unsigned char checkSTX = NOT_OK, checkETX = NOT_OK;
-	unsigned short rcvCount, rcvLength, mode, commError = 0;
+	unsigned short rcvCount, mode;
 
 	InitQueue(&receiveQueue[0]);
 	HAL_UART_Receive_IT(&huart2, (uint8_t *)&receiveBuffer[0][0], 1);
@@ -428,16 +428,16 @@ void StartCom1Task(void const * argument)
 									break;
 							}
 
-							if( ret == 1 )	commError = 0;
+							if( ret == 1 )	commError[0] = 0;
 							else {
-								if( commError < 10 )	commError = commError + 1;
+								if( commError[0] < 10 )	commError[0] = commError[0] + 1;
 							}
 
 							mode = NEXT_MODE;
 						}
 					}
 					else {
-						if( commError < 10 )	commError = commError + 1;
+						if( commError[0] < 10 )	commError[0] = commError[0] + 1;
 						mode = NEXT_MODE;
 					}
 				}
@@ -448,7 +448,7 @@ void StartCom1Task(void const * argument)
 		if( xmitTime[0] >= XMIT_TIME ) {
 			if( mode != XMIT_MODE ) {
 				if( mode == RECEIVE_MODE ) {
-					if( commError < 10 )	commError = commError + 1;
+					if( commError[0] < 10 )	commError[0] = commError[0] + 1;
 				}
 
 				mode = XMIT_MODE;
@@ -456,7 +456,7 @@ void StartCom1Task(void const * argument)
 			}
 		}
 		
-		if( commError == 10 ) {
+		if( commError[0] == 10 ) {
 			memset(&comData[0][6], 0x00, myInfo.portInfo[0].dataLength);
 			comData[0][6] = 0;
 			comData[0][7] = 1;
@@ -478,9 +478,9 @@ void StartCom2Task(void const * argument)
 {
 	/* USER CODE BEGIN StartCom2Task */
 	char rcvData[100], xmitData[15] = { 0, }, ret;
-	unsigned char xmitNob, stx, etx, xmitType = 0;
+	unsigned char xmitNob, stx, etx;
 	unsigned char checkSTX = NOT_OK, checkETX = NOT_OK;
-	unsigned short rcvCount, rcvLength, mode, commError = 0;
+	unsigned short rcvCount, mode;
 
 	InitQueue(&receiveQueue[1]);
 	HAL_UART_Receive_IT(&huart3, (uint8_t *)&receiveBuffer[1][0], 1);
@@ -618,16 +618,16 @@ void StartCom2Task(void const * argument)
 									break;
 							}
 
-							if( ret == 1 )	commError = 0;
+							if( ret == 1 )	commError[1] = 0;
 							else {
-								if( commError < 10 )	commError = commError + 1;
+								if( commError[1] < 10 )	commError[1] = commError[1] + 1;
 							}
 
 							mode = NEXT_MODE;
 						}
 					}
 					else {
-						if( commError < 10 )	commError = commError + 1;
+						if( commError[1] < 10 )	commError[1] = commError[1] + 1;
 						mode = NEXT_MODE;
 					}
 				}
@@ -638,7 +638,7 @@ void StartCom2Task(void const * argument)
 		if( xmitTime[1] >= XMIT_TIME ) {
 			if( mode != XMIT_MODE ) {
 				if( mode == RECEIVE_MODE ) {
-					if( commError < 10 )	commError = commError + 1;
+					if( commError[1] < 10 )	commError[1] = commError[1] + 1;
 				}
 
 				mode = XMIT_MODE;
@@ -646,7 +646,7 @@ void StartCom2Task(void const * argument)
 			}
 		}
 		
-		if( commError == 10 ) {
+		if( commError[1] == 10 ) {
 			memset(&comData[1][6], 0x00, myInfo.portInfo[1].dataLength);
 			comData[1][6] = 0;
 			comData[1][7] = 1;
@@ -668,9 +668,9 @@ void StartCom3Task(void const * argument)
 {
 	/* USER CODE BEGIN StartCom3Task */
 	char rcvData[100], xmitData[15] = { 0, }, ret;
-	unsigned char xmitNob, stx, etx, xmitType = 0;
+	unsigned char xmitNob, stx, etx;
 	unsigned char checkSTX = NOT_OK, checkETX = NOT_OK;
-	unsigned short rcvCount, rcvLength, mode, commError = 0;
+	unsigned short rcvCount, mode;
 
 	InitQueue(&receiveQueue[2]);
 	HAL_UART_Receive_IT(&huart4, (uint8_t *)&receiveBuffer[2][0], 1);
@@ -808,16 +808,16 @@ void StartCom3Task(void const * argument)
 									break;
 							}
 
-							if( ret == 1 )	commError = 0;
+							if( ret == 1 )	commError[2] = 0;
 							else {
-								if( commError < 10 )	commError = commError + 1;
+								if( commError[2] < 10 )	commError[2] = commError[2] + 1;
 							}
 
 							mode = NEXT_MODE;
 						}
 					}
 					else {
-						if( commError < 10 )	commError = commError + 1;
+						if( commError[2] < 10 )	commError[2] = commError[2] + 1;
 						mode = NEXT_MODE;
 					}
 				}
@@ -828,7 +828,7 @@ void StartCom3Task(void const * argument)
 		if( xmitTime[2] >= XMIT_TIME ) {
 			if( mode != XMIT_MODE ) {
 				if( mode == RECEIVE_MODE ) {
-					if( commError < 10 )	commError = commError + 1;
+					if( commError[2] < 10 )	commError[2] = commError[2] + 1;
 				}
 
 				mode = XMIT_MODE;
@@ -836,7 +836,7 @@ void StartCom3Task(void const * argument)
 			}
 		}
 		
-		if( commError == 10 ) {
+		if( commError[2] == 10 ) {
 			memset(&comData[2][6], 0x00, myInfo.portInfo[2].dataLength);
 			comData[2][6] = 0;
 			comData[2][7] = 1;
@@ -871,6 +871,8 @@ void StartDebugTask(void const * argument)
 	/* definition and creation of Com3Task */
 	osThreadDef(Com3Task, StartCom3Task, osPriorityNormal, 0, 256);
 	Com3TaskHandle = osThreadCreate(osThread(Com3Task), NULL);
+	
+	memset(&commError[0], 0x00, sizeof(commError));
 	
 	/* Infinite loop */
 	while( true ) {

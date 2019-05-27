@@ -23,9 +23,9 @@
 
 if ($debugfile -eq "")
 {
-& "C:\Program Files (x86)\IAR Systems\Embedded Workbench 8.1\common\bin\cspybat" -f "D:\Project\Ntriever\신규RCU\Workspace\NT422\EWARM\settings\NT422.NT422.general.xcl" --backend -f "D:\Project\Ntriever\신규RCU\Workspace\NT422\EWARM\settings\NT422.NT422.driver.xcl" 
+& "C:\Program Files (x86)\IAR Systems\Embedded Workbench 8.1\common\bin\cspybat" -f "F:\SpaceHub\Indoor\NT422\EWARM\settings\NT422.NT422.general.xcl" --backend -f "F:\SpaceHub\Indoor\NT422\EWARM\settings\NT422.NT422.driver.xcl" 
 }
 else
 {
-& "C:\Program Files (x86)\IAR Systems\Embedded Workbench 8.1\common\bin\cspybat" -f "D:\Project\Ntriever\신규RCU\Workspace\NT422\EWARM\settings\NT422.NT422.general.xcl" --debug_file=$debugfile --backend -f "D:\Project\Ntriever\신규RCU\Workspace\NT422\EWARM\settings\NT422.NT422.driver.xcl" 
+& "C:\Program Files (x86)\IAR Systems\Embedded Workbench 8.1\common\bin\cspybat" -f "F:\SpaceHub\Indoor\NT422\EWARM\settings\NT422.NT422.general.xcl" --debug_file=$debugfile --backend -f "F:\SpaceHub\Indoor\NT422\EWARM\settings\NT422.NT422.driver.xcl" 
 }

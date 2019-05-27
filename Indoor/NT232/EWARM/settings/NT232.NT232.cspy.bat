@@ -25,7 +25,7 @@ if not "%~1" == "" goto debugFile
 
 @echo on 
 
-"C:\Program Files (x86)\IAR Systems\Embedded Workbench 8.1\common\bin\cspybat" -f "D:\Project\Ntriever\신규RCU\Workspace\NT232\EWARM\settings\NT232.NT232.general.xcl" --backend -f "D:\Project\Ntriever\신규RCU\Workspace\NT232\EWARM\settings\NT232.NT232.driver.xcl" 
+"C:\Program Files (x86)\IAR Systems\Embedded Workbench 8.1\common\bin\cspybat" -f "F:\SpaceHub\Indoor\NT232\EWARM\settings\NT232.NT232.general.xcl" --backend -f "F:\SpaceHub\Indoor\NT232\EWARM\settings\NT232.NT232.driver.xcl" 
 
 @echo off 
 goto end 
@@ -34,7 +34,7 @@ goto end
 
 @echo on 
 
-"C:\Program Files (x86)\IAR Systems\Embedded Workbench 8.1\common\bin\cspybat" -f "D:\Project\Ntriever\신규RCU\Workspace\NT232\EWARM\settings\NT232.NT232.general.xcl" "--debug_file=%~1" --backend -f "D:\Project\Ntriever\신규RCU\Workspace\NT232\EWARM\settings\NT232.NT232.driver.xcl" 
+"C:\Program Files (x86)\IAR Systems\Embedded Workbench 8.1\common\bin\cspybat" -f "F:\SpaceHub\Indoor\NT232\EWARM\settings\NT232.NT232.general.xcl" "--debug_file=%~1" --backend -f "F:\SpaceHub\Indoor\NT232\EWARM\settings\NT232.NT232.driver.xcl" 
 
 @echo off 
 :end
