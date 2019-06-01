@@ -303,7 +303,7 @@ void StartCom1Task(void const * argument)
 			switch( myInfo.portInfo[0].name ) {
 				case DONGA_CRS1800 :
 				case ANTS_CRS1800 :
-					xmitType = xmitType ^ 0x01;
+					xmitType = (xmitType + 1) % 3;
 					xmitNob = XmitDongACRS1800(xmitData, xmitType);
 					stx = xmitData[13];
 					etx = xmitData[14];
@@ -502,18 +502,21 @@ void StartCom2Task(void const * argument)
 			switch( myInfo.portInfo[1].name ) {
 				case DONGA_CRS1800 :
 				case ANTS_CRS1800 :
+					xmitType = (xmitType + 1) % 3;
 					xmitNob = XmitDongACRS1800(xmitData, xmitType);
 					stx = xmitData[13];
 					etx = xmitData[14];
 					break;
 					
 				case DONGA_CRS1800N :
+					xmitType = (xmitType + 1) % 3;
 					xmitNob = XmitDongACRS1800N(xmitData, xmitType);
 					stx = xmitData[13];
 					etx = xmitData[14];
 					break;
 					
 				case DONGA_MR :
+					xmitType = (xmitType + 1) % 4;
 					xmitNob = XmitDongAMR(xmitData, xmitType);
 					stx = xmitData[13];
 					etx = xmitData[14];
@@ -522,6 +525,7 @@ void StartCom2Task(void const * argument)
 				case MBRS_1200R :
 				case MBRS_1200N :
 				case MBRS_1200 :
+					xmitType = xmitType ^ 0x01;
 					xmitNob = XmitMBRS1200R(xmitData, xmitType);
 					stx = xmitData[13];
 					etx = xmitData[14];
@@ -586,19 +590,16 @@ void StartCom2Task(void const * argument)
 								case ANTS_CRS1800 :
 									rcvData[rcvCount] = 0;
 									ret = ParsingDongACRS1800(COM2, rcvData, rcvCount, xmitType);
-									xmitType = xmitType ^ 0x01;
 									break;
 									
 								case DONGA_CRS1800N :
 									rcvData[rcvCount] = 0;
 									ret = ParsingDongACRS1800N(COM2, rcvData, rcvCount, xmitType);
-									xmitType = (xmitType + 1) % 3;
 									break;
 									
 								case DONGA_MR :
 									rcvData[rcvCount] = 0;
 									ret = ParsingDongAMR(COM2, rcvData, rcvCount, xmitType);
-									xmitType = (xmitType + 1) % 4;
 									break;
 									
 								case MBRS_1200R :
@@ -606,7 +607,6 @@ void StartCom2Task(void const * argument)
 								case MBRS_1200 :
 									rcvData[rcvCount] = 0;
 									ret = ParsingMBRS1200R(COM2, rcvData, rcvCount, xmitType);
-									xmitType = xmitType ^ 0x01;
 									break;
 									
 								case EMERSON :
@@ -701,18 +701,21 @@ void StartCom3Task(void const * argument)
 			switch( myInfo.portInfo[2].name ) {
 				case DONGA_CRS1800 :
 				case ANTS_CRS1800 :
+					xmitType = (xmitType + 1) % 3;
 					xmitNob = XmitDongACRS1800(xmitData, xmitType);
 					stx = xmitData[13];
 					etx = xmitData[14];
 					break;
 					
 				case DONGA_CRS1800N :
+					xmitType = (xmitType + 1) % 3;
 					xmitNob = XmitDongACRS1800N(xmitData, xmitType);
 					stx = xmitData[13];
 					etx = xmitData[14];
 					break;
 					
 				case DONGA_MR :
+					xmitType = (xmitType + 1) % 4;
 					xmitNob = XmitDongAMR(xmitData, xmitType);
 					stx = xmitData[13];
 					etx = xmitData[14];
@@ -721,6 +724,7 @@ void StartCom3Task(void const * argument)
 				case MBRS_1200R :
 				case MBRS_1200N :
 				case MBRS_1200 :
+					xmitType = xmitType ^ 0x01;
 					xmitNob = XmitMBRS1200R(xmitData, xmitType);
 					stx = xmitData[13];
 					etx = xmitData[14];
@@ -785,19 +789,16 @@ void StartCom3Task(void const * argument)
 								case ANTS_CRS1800 :
 									rcvData[rcvCount] = 0;
 									ret = ParsingDongACRS1800(COM3, rcvData, rcvCount, xmitType);
-									xmitType = xmitType ^ 0x01;
 									break;
 									
 								case DONGA_CRS1800N :
 									rcvData[rcvCount] = 0;
 									ret = ParsingDongACRS1800N(COM3, rcvData, rcvCount, xmitType);
-									xmitType = (xmitType + 1) % 3;
 									break;
 									
 								case DONGA_MR :
 									rcvData[rcvCount] = 0;
 									ret = ParsingDongAMR(COM3, rcvData, rcvCount, xmitType);
-									xmitType = (xmitType + 1) % 4;
 									break;
 									
 								case MBRS_1200R :
@@ -805,7 +806,6 @@ void StartCom3Task(void const * argument)
 								case MBRS_1200 :
 									rcvData[rcvCount] = 0;
 									ret = ParsingMBRS1200R(COM3, rcvData, rcvCount, xmitType);
-									xmitType = xmitType ^ 0x01;
 									break;
 									
 								case EMERSON :

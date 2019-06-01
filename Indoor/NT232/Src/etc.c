@@ -393,8 +393,9 @@ unsigned char XmitDongACRS1800(char *xmitData, char xmitType)
 	xmitData[1] = 0x01;			// Destination Address
 	xmitData[2] = 0x00;			// Source Address
 	xmitData[3] = 0x01;			// Length
-	if( xmitType == 0 )	xmitData[4] = 'R';			// Command
-	else				xmitData[4] = 'M';			// Command
+	if( xmitType == 0 )			xmitData[4] = 'R';			// Command
+	else if( xmitType == 1 )	xmitData[4] = 'I';			// Command
+	else						xmitData[4] = 'M';			// Command
 	xmitData[5] = 0xCA;			// ETX
 	xmitData[6] = 0;			// checksum
 	xmitData[7] = 0;			// CRCL
@@ -454,6 +455,14 @@ char ParsingDongACRS1800(char port, char *rcvData, unsigned char rcvCount, char 
 			comData[port - 1][index + 19] = rcvData[35];
 		}
 		else if( xmitType == 1 ) {
+			comData[port - 1][index + 58] = 0;									// 충전 모드 상태
+			if( rcvData[25] == 0 )		comData[port - 1][index + 59] = 1;		// 시뮬레이터 AUTO 이면 
+			else if( rcvData[25] == 1 ) comData[port - 1][index + 59] = 3;		// 시뮬레이터 Manual FL 이면
+			else if( rcvData[25] == 2 )	comData[port - 1][index + 59] = 4;		// 시뮬레이터 Manual EQ 이면
+                        
+			memset(&comData[port - 1][index + 60], 0x00, 3);
+		}
+		else if( xmitType == 2 ) {
 			comData[port - 1][index + 20] = 0;				// 모듈 실탈장 상태
 			comData[port - 1][index + 21] = 0;
 			comData[port - 1][index + 22] = 0;
@@ -476,9 +485,9 @@ char ParsingDongACRS1800(char port, char *rcvData, unsigned char rcvCount, char 
 				}
 			}
 
-			memset(&comData[port - 1][index + 24], 0x00, 38);
+			memset(&comData[port - 1][index + 24], 0x00, 34);
 		}
-		
+
 		return 1;
 	}
 	else	return 0;
@@ -569,6 +578,10 @@ char ParsingDongACRS1800N(char port, char *rcvData, unsigned char rcvCount, char
 			comData[port - 1][index + 25] = rcvData[30];
 			comData[port - 1][index + 56] = 0;				// 충전 감시모드 사용상태
 			comData[port - 1][index + 57] = rcvData[31];
+			comData[port - 1][index + 58] = 0;									// 충전모드
+			if( rcvData[25] == 0 )		comData[port - 1][index + 59] = 1;		// 시뮬레이터 AUTO 이면 
+			else if( rcvData[25] == 1 ) comData[port - 1][index + 59] = 3;		// 시뮬레이터 Manual FL 이면
+			else if( rcvData[25] == 2 )	comData[port - 1][index + 59] = 4;		// 시뮬레이터 Manual EQ 이면
 		}
 		else if( xmitType == 2 ) {
 			comData[port - 1][index + 20] = 0;				// 모듈 실탈장 상태
@@ -592,8 +605,6 @@ char ParsingDongACRS1800N(char port, char *rcvData, unsigned char rcvCount, char
 					}
 				}
 			}
-			comData[port - 1][index + 58] = 0;		// 충전모드
-			comData[port - 1][index + 59] = 0;
 			comData[port - 1][index + 60] = 0;		// 전압제어수행중
 			comData[port - 1][index + 61] = 0;
 		}
